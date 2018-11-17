@@ -1,2 +1,2 @@
-./src/.ipynb_checkpoints
-.ipybn_checkpoints
+./src/.ipynb_checkpoints/*
+.ipybn_checkpoints/*

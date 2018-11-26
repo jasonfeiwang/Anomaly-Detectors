@@ -50,7 +50,7 @@ There are 6 variables used to identify energy consumption and cost information:
 
 ### Address issues with the incoming data
 
-*scaling, missing value imputation, erroneous data point
+* scaling, missing value imputation, erroneous data point:
 
 1. General Data Cleaning
 
@@ -65,7 +65,7 @@ We also cleaned data types of consumption and cost data from string to float so 
 3. Address Date inconsistency
 Since the meter reading is done manually in many buildings in New York, the meter reading dates (service start date and service end date) are not consistent across all entries. However, the reading dates can be used to identify overlaps in billing period to detect overcharging due to double billing. 
 
-* Challenges in data pipeline creation
+* Challenges in data pipeline creation:
 
 ### Provide some additional insight to the data in the form of statistical or graphical analysis.
 

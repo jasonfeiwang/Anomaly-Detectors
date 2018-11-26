@@ -50,24 +50,62 @@ There are 6 variables used to identify energy consumption and cost information:
 
 ### Address issues with the incoming data
 
-* scaling, missing value imputation, erroneous data point:
+* Scaling, missing value imputation, erroneous data point:
 
 1. General Data Cleaning
 
-We cleaned the raw data to exclude rows with null account name and estimated electricity charges since they will not have accurate predictive value for our model.
+First, we cleaned the raw data to exclude rows with null account name, duplicated values and estimated electricity charges since they will not have accurate predictive value for our model.
 
-We also cleaned data types of consumption and cost data from string to float so that we can generate distribution statistics from 
+Secondly, we cleaned data types of consumption and cost data from string to float so that we can generate distribution statistics from these metrics.
+
+Thirdly, we converted revenue month, service start data and service end date to datetime type in python for processing and analysis.
+
+Lastly, after data quality checks, we removed rows where all values associated with consumption and charges are zero, since null values in these fields indicate the entry is not valid.
 
 2. Create Unique identifier
 
-
+We used the combination of 'TDS#' and 'Location' to create 'Building ID' as the unique identifier for each building. However, 'Building ID' alone is still not the primary key for each data entry, we are able to uniquely identify over 99.8% of the data entries by combining 'Building ID', 'Meter Number' and 'Revenue Month'.
 
 3. Address Date inconsistency
-Since the meter reading is done manually in many buildings in New York, the meter reading dates (service start date and service end date) are not consistent across all entries. However, the reading dates can be used to identify overlaps in billing period to detect overcharging due to double billing. 
+
+Since the meter reading is done manually in many buildings in New York, the meter reading dates (service start date and service end date) are not consistent across all entries. However, the service dates can be used to both aggregate monthly billing and to identify overlaps in billing period to detect overcharging due to double billing. Therefore, we combined rows that have the same building id, meter number and revenue month to account for the service date inconsistency.
+
+4. Adding new calculated metrics
+
+After reviewing available metrics and consulting with domain expert, we decided to add two more calculated fields for our predicative model.
+
+'Total Charges' is calculated by adding 'KW Charges' to 'KWH Charges', this field will provide a more comprehensive trend of total consumption cost.
+
+'Total Energy Rate' is calculated by dividing 'Total Charges' by 'Consumption (KWH)', this field is the industry standard measure for evaluating consumption efficiency.
 
 * Challenges in data pipeline creation:
 
-### Provide some additional insight to the data in the form of statistical or graphical analysis.
+### Provide some additional insight to the data in the form of statistical or graphical 
+
+For the analysis below, we will be using the cleaned version of data where we added columns for unique identifier and calculated fields for total charges and total energy rate. 
+
+The cleaned version of data has 252554 rows and 16 columns. Column variables are listed below:
+
+| Variable Name      | Variable type |
+|--------------------|---------------|
+| Account Name       | string        |
+| Location           | string        |
+| Building ID        | string        |
+| Meter Number       | string        |
+| Revenue Month      | datetime64    |
+| Service Start Date | datetime64    |
+| Service End Date   | datetime64    |
+| # days             | float         |
+| Consumption (KW)   | float         |
+| Consumption (KWH)  | float         |
+| Current Charges    | float         |
+| KW Charges         | float         |
+| KWH Charges        | float         |
+| Other charges      | float         |
+| Total Charges      | float         |
+| Total Energy Rate  | float         |
+
+
 
 ### Fully describe which features you will be using in your design
 

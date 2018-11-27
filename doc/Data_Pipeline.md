@@ -80,7 +80,7 @@ After reviewing available metrics and consulting with domain expert, we decided 
 
 * Challenges in data pipeline creation:
 
-### Provide some additional insight to the data in the form of statistical or graphical 
+### Provide some additional insight to the data in the form of statistical or graphical analysis
 
 For the analysis below, we will be using the cleaned version of data where we added columns for unique identifier and calculated fields for total charges and total energy rate. 
 
@@ -105,7 +105,20 @@ The cleaned version of data has 252554 rows and 16 columns. Column variables are
 | Total Charges      | float         |
 | Total Energy Rate  | float         |
 
+We first generated distribution statistics on all the numeric fields:
 
+|       | Consumption (KW) | Consumption (KWH) | Current Charges | KWH Charges   | KW Charges   | Other charges | Total Charges | Total Energy Rate |
+|-------|------------------|-------------------|-----------------|---------------|--------------|---------------|---------------|-------------------|
+| count | 252554           | 252554            | 252554          | 252554        | 252554       | 252554        | 252554        | 252554            |
+| mean  | 68.472229        | 33058.35          | 4568.972260     | 1698.409516   | 1088.141845  | 1699.030754   | 2786.551361   | inf               |
+| std   | 121.695395       | 53707.28          | 6722.453061     | 2958.148067   | 1783.039027  | 3667.192281   | 3614.090060   | NaN               |
+| min   | 0.000000         | 0.000000          | -243.150000     | 0.000000      | 0.000000     | -59396.430000 | 0.000000      | 0.000000          |
+| 25%   | 0.000000         | 0.000000          | 421.240000      | 0.000000      | 0.000000     | 0.000000      | 825.390000    | 0.05486036        |
+| 50%   | 32.400000        | 12160             | 2555.780000     | 594.000000    | 462.940000   | 910.270000    | 1722.690000   | 0.08328255        |
+| 75%   | 99.200000        | 48800             | 6120.545000     | 2385.070000   | 1603.822500  | 2659.952500   | 3270.170000   | inf               |
+| max   | 16135.460000     | 1779600           | 329800.370000   | 195575.860000 | 78782.960000 | 134224.510000 | 195575.860000 | inf               | 
+
+From the statistics, we can see that more than 25% of the consumption (KWH) values are 0, which caused values in Total Energy Rate to be infinite and invalid for further evaluation. However, from the 50% quartile, we can get a sense of the valid energy rate range. We are also able to detect range from 50% quartile for other measures for consumption and charges, especially the fact that other charges have large range for positive and negative values. This will later be useful for setting criteria for anomaly detection.
 
 ### Fully describe which features you will be using in your design
 

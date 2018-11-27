@@ -120,6 +120,10 @@ We first generated distribution statistics on all the numeric fields:
 
 From the statistics, we can see that more than 25% of the consumption (KWH) values are 0, which caused values in Total Energy Rate to be infinite and invalid for further evaluation. However, from the 50% quartile, we can get a sense of the valid energy rate range. We are also able to detect range from 50% quartile for other measures for consumption and charges, especially the fact that other charges have large range for positive and negative values. This will later be useful for setting criteria for anomaly detection.
 
+We also explored potential time series trend over the 8 years data span as well as seasonality in energy consumption data, and from the below boxplot trend, we can see a clear seasonality component in the data as well as slightly decreasing energy consumption trend reflected in the Total Charges.
+
+![](total_charge_trend.png)
+
 ### Fully describe which features you will be using in your design
 
 

@@ -80,6 +80,10 @@ After reviewing available metrics and consulting with domain expert, we decided 
 
 * Challenges in data pipeline creation:
 
+Currently, the data files we are working with come from flat files provided by our sponsor. Therefore, we are ingesting static data into Jupyter Notebook for processing and creating rules for anomaly detection.
+
+In the long term, we are planning on deploying rules in our sponsor's SQL database to detect consumption and charges anomalies automatically with new data coming in on a monthly basis.
+
 ### Provide some additional insight to the data in the form of statistical or graphical analysis
 
 For the analysis below, we will be using the cleaned version of data where we added columns for unique identifier and calculated fields for total charges and total energy rate. 
@@ -126,5 +130,19 @@ We also explored potential time series trend over the 8 years data span as well 
 
 
 ### Fully describe which features you will be using in your design
+
+We have three sets of features for our model design: location features, timestamp features and consumption/charge features. 
+
+* In the location features set, we will incorporate building id, number of meters, and potentially sqft of the building space or number of floors in the building. These features will help set a base range for anomaly detection on different building types.
+
+* In the timestamp features set, we will include revenue month for consistency, and also include both service start date and service end date to account for possibilities of double bills or missing bills. Seasonality will affect the range for anomaly detection and we will use revenue month to account for the seasonality factor.
+
+* In the consumption/charge features set, we will mainly use Total Charge and Total Energy Rate to build the anomaly detection model, since these two features are the most comprehensive measures across all building types and energy type.
+
+
+
+
+
+
 
 

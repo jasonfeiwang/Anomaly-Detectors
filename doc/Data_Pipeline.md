@@ -58,12 +58,25 @@ We cleaned the raw data to exclude rows with null account name and estimated ele
 
 We also cleaned data types of consumption and cost data from string to float so that we can generate distribution statistics from 
 
+ - rows where utility charges were estimated instead of measured
+ - remove irrelevant attributes such as "Meter Scope"
+ - remove duplicated rows
+ - convert attributes into appropriate data types (datetime)
+ - remove rows where values of energy consumption and charges are all zero
+ - clean up the "Meter Number" field (some meter numbers apppear as both integers and strings)
+
 2. Create Unique identifier
 
+We need to study the energy consumptions and charges at two levels - building level and account level. Where in one building there might be multiple meters. 
 
+Building level identifier - TDS number + Location
+Account level identifier - TDS number + Location + Meter
+Unique Identifier for the dataset: TDS number + Location + Meter + Revenue Month
 
 3. Address Date inconsistency
-Since the meter reading is done manually in many buildings in New York, the meter reading dates (service start date and service end date) are not consistent across all entries. However, the reading dates can be used to identify overlaps in billing period to detect overcharging due to double billing. 
+Since the meter reading is done manually in many buildinngs in New York, the meter reading dates (service start date and service end date) are not consistent across all entries. However, the reading dates can be used to identify overlaps in billing period to detect overcharging due to double billing. 
+
+Rebilling (multiple rows for the same account and service date ranges)
 
 * Challenges in data pipeline creation:
 

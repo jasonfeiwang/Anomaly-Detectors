@@ -124,6 +124,7 @@ We also explored potential time series trend over the 8 years data span as well 
 
 ![](total_charge_trend.png)
 
+
 ### Fully describe which features you will be using in your design
 
 

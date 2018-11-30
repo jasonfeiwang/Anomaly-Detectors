@@ -79,8 +79,7 @@ Lastly, we converted the time-related variables such as revenue_month, service_s
 Based on the metadata info of the NYCHA public dataset, we used the combination of 'TDS#' and 'Location' to create 'Building ID' as the unique identifier for each building. However, 'Building ID' alone is still not the primary key for each data entry, we are able to uniquely identify over 99.8% of the data entries by combining 'Building ID', 'Meter Number' and 'Revenue Month'. This aligns well with our understanding of the data granularities (2 levels). The remaining 0.2% of the entries are caused by rebilling (two entries for the same billing window of the same meter) and invalid entries where all values associated with consumption and charges are zero.
 
 3. Check validity of data entry logics
-  
-
+   
 We found the percentages of rows with zero values in our metrics of interest were surprisingly high:
 
     - perc of rows - current charges of zero: 16.61%
@@ -89,19 +88,11 @@ We found the percentages of rows with zero values in our metrics of interest wer
 
 When aggregating the metrics based on meter numbers, it seems that some meters only record either the KWH charges or the KW charges. Following is a break-down of meters by type: 
 
-<<<<<<< HEAD
-    - perc of kw_only meters: 26.99%
-    - perc of kwh_only meters: 31.93%
-    - perc of kwh_and_kw meters: 41.09%
-
-40.99% of the buildings have both kw_only and kwh_only meters. For these buildings, we might need to merge some of their meters so that both kw and kwh charges are represented in the same meter account.
-=======
     - perc of kw_only meters: 27.66%
     - perc of kwh_only meters: 38.20%
     - perc of kwh_and_kw meters: 34.13%
   
 52.79% of the buildings have both kw_only and kwh_only meters. For these buildings, we might need to merge some of their meters so that both kw and kwh charges are represented in the same meter account.
->>>>>>> 6fd61d946231069df880e25fff5815b3739af6bd
 
 By deep-diving into the data, we found there are many cases where under the same Building_ID, two meter numbers share the same last 6 digits and billing windows of all the years. Usually one meter has zero values in all KW_Charges and one has zero values in all KWH_Charges. It seems reasonable to combined them.
 
@@ -112,17 +103,10 @@ In the end, our statistics improved as follows:
     - perc of rows - current charges of zero: 4.17%
     - perc of rows - kw charges of zero: 19.90%
     - perc of rows - kwh charges of zero: 8.47%
-<<<<<<< HEAD
-    
-    - perc of kw_only meters: 2.12%
-    - perc of kwh_only meters: 19.00%
-    - perc of kwh_and_kw meters: 78.88%
-=======
 
     - perc of kw_only meters: 2.16%
     - perc of kwh_only meters: 20.62%
     - perc of kwh_and_kw meters: 77.23%
->>>>>>> 6fd61d946231069df880e25fff5815b3739af6bd
 
 The percentage of meters that do not have KW Charges is still quite high (21%), we need to further consult with our domain knowledge expert to figure out how to handle that. All other metrics appear resonable.
 
@@ -185,22 +169,13 @@ We first generated distribution statistics on all the numeric fields:
 | 25%   | 0.000000         | 0.000000          | 421.240000      | 0.000000      | 0.000000     | 0.000000      | 825.390000    | 0.05486036        |
 | 50%   | 32.400000        | 12160             | 2555.780000     | 594.000000    | 462.940000   | 910.270000    | 1722.690000   | 0.08328255        |
 | 75%   | 99.200000        | 48800             | 6120.545000     | 2385.070000   | 1603.822500  | 2659.952500   | 3270.170000   | inf               |
-| max   | 16135.460000     | 1779600           | 329800.370000   | 195575.860000 | 78782.960000 | 134224.510000 | 195575.860000 | inf               |
+| max   | 16135.460000     | 1779600           | 329800.370000   | 195575.860000 | 78782.960000 | 134224.510000 | 195575.860000 | inf               | 
 
 From the statistics, we can see that more than 25% of the consumption (KWH) values are 0, which caused values in Total Energy Rate to be infinite and invalid for further evaluation. However, from the 50% quartile, we can get a sense of the valid energy rate range. We are also able to detect range from 50% quartile for other measures for consumption and charges, especially the fact that other charges have large range for positive and negative values. This will later be useful for setting criteria for anomaly detection.
 
 We also explored potential time series trend over the 8 years data span as well as seasonality in energy consumption data, and from the below boxplot trend, we can see a clear seasonality component in the data as well as slightly decreasing energy consumption trend reflected in the Total Charges.
 
-![total_charge_trend](/Users/Gaz/Documents/capstone-2018/Git_Fei/AnomalyDetectors/doc/total_charge_trend.png)
-
-
-
-Another analysis that we did, was to segregate the months out from the cleaned dataset, aggregate all the values for electricity consumption(KW and KWH), and visualize the trend of how the consumption varies on a month by month basis. The plot on the left charts the KW consumption and the one on the right KWH. The graphs are somewhat similar in their peaks and lows, and it is easy to see the higher consumption during the summer months.  
-
-
-
-![Consumption_Vs_Month](/Users/Gaz/Documents/capstone-2018/Git_Fei/AnomalyDetectors/doc/Consumption_Vs_Month.png)
-
+![](total_charge_trend.png)
 
 
 ### Fully describe which features you will be using in your design

@@ -64,7 +64,7 @@ Besides those rules, our sponsor Linnea Paton from JLL pointed out some edge cas
 Following are the steps we took to explore and clean the data:
 
 
-#### Scaling, missing value imputation, erroneous data point:
+#### Step 1: Scaling, missing value imputation, erroneous data point:
 
 1. General Data Cleaning
 
@@ -127,7 +127,7 @@ Following are the steps we took to explore and clean the data:
 
    'Total Energy Rate' is calculated by dividing 'Total Charges' by 'Consumption (KWH)', this field is the industry standard measure for evaluating consumption efficiency.
 
-#### Challenges in data pipeline creation:
+#### Step 2: Challenges in data pipeline creation:
 
 Currently, the data files we are working with come from flat files provided by our sponsor. Therefore, we are ingesting stdata into Jupyter Notebook for processing and creating rules for anomaly detection.
 

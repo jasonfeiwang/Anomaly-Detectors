@@ -137,46 +137,52 @@ In the long term, we are planning on deploying rules in our sponsor's SQL databa
 
 For the analysis below, we will be using the cleaned version of data where we added columns for unique identifier and calculated fields for total charges and total energy rate. 
 
-The cleaned version of data has 185,900 rows and 16 columns. Column variables are listed below:
+The cleaned version of data has 180,020 rows and 17 columns. Column variables are listed below:
 
 | Variable Name      | Variable type |
 |--------------------|---------------|
-| Account Name       | string        |
+| Account_Name       | string        |
 | Location           | string        |
-| Building ID        | string        |
-| Meter Number       | string        |
-| Revenue Month      | datetime64    |
-| Service Start Date | datetime64    |
-| Service End Date   | datetime64    |
+| Building_ID        | string        |
+| Meter_Number       | string        |
+| Revenue_Month      | datetime64    |
+| Revenue_Year       | int64         |
+| Service_Start_Date | datetime64    |
+| Service_End_Date   | datetime64    |
 | # days             | float         |
-| Consumption (KW)   | float         |
-| Consumption (KWH)  | float         |
-| Current Charges    | float         |
-| KW Charges         | float         |
-| KWH Charges        | float         |
-| Other charges      | float         |
-| Total Charges      | float         |
-| Total Energy Rate  | float         |
+| Consumption_KW     | float         |
+| Consumption_KWH    | float         |
+| Current_Charges    | float         |
+| KW_Charges         | float         |
+| KWH_Charges        | float         |
+| Other_Charges      | float         |
+| Total_Charges      | float         |
+| Total_Energy_Rate  | float         |
 
 We first generated distribution statistics on all the numeric fields:
 
-|       | Consumption (KW) | Consumption (KWH) | Current Charges | KWH Charges   | KW Charges   | Other charges | Total Charges | Total Energy Rate |
-|-------|------------------|-------------------|-----------------|---------------|--------------|---------------|---------------|-------------------|
-| count | 252554           | 252554            | 252554          | 252554        | 252554       | 252554        | 252554        | 252554            |
-| mean  | 68.472229        | 33058.35          | 4568.972260     | 1698.409516   | 1088.141845  | 1699.030754   | 2786.551361   | inf               |
-| std   | 121.695395       | 53707.28          | 6722.453061     | 2958.148067   | 1783.039027  | 3667.192281   | 3614.090060   | NaN               |
-| min   | 0.000000         | 0.000000          | -243.150000     | 0.000000      | 0.000000     | -59396.430000 | 0.000000      | 0.000000          |
-| 25%   | 0.000000         | 0.000000          | 421.240000      | 0.000000      | 0.000000     | 0.000000      | 825.390000    | 0.05486036        |
-| 50%   | 32.400000        | 12160             | 2555.780000     | 594.000000    | 462.940000   | 910.270000    | 1722.690000   | 0.08328255        |
-| 75%   | 99.200000        | 48800             | 6120.545000     | 2385.070000   | 1603.822500  | 2659.952500   | 3270.170000   | inf               |
-| max   | 16135.460000     | 1779600           | 329800.370000   | 195575.860000 | 78782.960000 | 134224.510000 | 195575.860000 | inf               | 
+|       | Consumption_KW | Consumption_KWH | Current_Charges | KWH_Charges   | KW_Charges    | Other_Charges | Total_Charges | Total_Energy_Rate |
+|-------|----------------|-----------------|-----------------|---------------|---------------|---------------|---------------|-------------------|
+| count | 180020         | 180020          | 180020          | 180020        | 180020        | 180020        | 180020        | 179979            |
+| mean  | 96.046511      | 46370.48        | 6408.680075     | 2382.229199   | 1393.816722   | 2383.041867   | 3776.045921   | NaN               |
+| std   | 134.623154     | 58546.57        | 8147.173101     | 3261.329493   | 2046.648840   | 3689.362177   | 4797.820717   | NaN               |
+| min   | 0.000000       | 0.000000        | -243.150000     | 0.000000      | -20198.180000 | -59396.430000 | -6624.860000  | -inf              |
+| 25%   | 18.900000      | 6030            | 1162.067500     | 328.527500    | 112.630000    | 467.955000    | 589.817500    | 0.07114916        |
+| 50%   | 68.690000      | 32740           | 4386.445000     | 1596.900000   | 1044.780000   | 1471.835000   | 2587.625000   | 0.08237193        |
+| 75%   | 126.297500     | 63040           | 8540.802500     | 3138.300000   | 2052.410000   | 3112.720000   | 5170.962500   | 0.09315815        |
+| max   | 16135.460000   | 1779600         | 329800.370000   | 195575.860000 | 78782.960000  | 134224.510000 | 195575.860000 | inf               |
 
-From the statistics, we can see that more than 25% of the consumption (KWH) values are 0, which caused values in Total Energy Rate to be infinite and invalid for further evaluation. However, from the 50% quartile, we can get a sense of the valid energy rate range. We are also able to detect range from 50% quartile for other measures for consumption and charges, especially the fact that other charges have large range for positive and negative values. This will later be useful for setting criteria for anomaly detection.
+From the statistics, we can get a sense of the valid energy consumption and rate range. We are also able to detect range from 25% quartile for other measures for consumption and charges, especially the fact that other charges have large range for positive and negative values. This will later be useful for setting criteria for anomaly detection.
 
-We also explored potential time series trend over the 8 years data span as well as seasonality in energy consumption data, and from the below boxplot trend, we can see a clear seasonality component in the data as well as slightly decreasing energy consumption trend reflected in the Total Charges.
+We also explored potential time series trend over the 8 years data span as well as seasonality in energy consumption data.
 
-![](total_charge_trend.png)
+From the below monthly total charge boxplot trend, we can see a clear seasonality component in the data  on a monthly basis.
 
+![](monthly_total_charge_trend.png)
+
+From the below yearly total charge boxplot trend, we can detect a slightly decreasing energy consumption trend as well as some potential anomaly in 2015.
+
+![](yearly_total_charge_trend.png)
 
 Another analysis that we did, was to segregate the months out from the cleaned dataset, aggregate all the values for electricity consumption(KW and KWH), and visualize the trend of how the consumption varies on a month by month basis. The plot on the left charts the KW consumption and the one on the right KWH. The graphs are somewhat similar in their peaks and lows, and it is easy to see the higher consumption during the summer months.
 

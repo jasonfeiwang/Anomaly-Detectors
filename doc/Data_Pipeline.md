@@ -82,15 +82,15 @@ Following are the steps we took to explore and clean the data:
    
    We found the percentages of rows with zero values in our metrics of interest were surprisingly high:
 
-    - perc of rows - current charges of zero: 16.61%
-    - perc of rows - kw charges of zero: 41.13%
-    - perc of rows - kwh charges of zero: 33.03%
+   > - perc of rows - current charges of zero: 16.61%
+   > - perc of rows - kw charges of zero: 41.13%
+   > - perc of rows - kwh charges of zero: 33.03%
 
    When aggregating the metrics based on meter numbers, it seems that some meters only record either the KWH charges or the KW charges. Following is a break-down of meters by type: 
 
-    - perc of kw_only meters: 27.66%
-    - perc of kwh_only meters: 38.20%
-    - perc of kwh_and_kw meters: 34.13%
+   > - perc of kw_only meters: 27.66%
+   > - perc of kwh_only meters: 38.20%
+   > - perc of kwh_and_kw meters: 34.13%
   
    52.79% of the buildings have both kw_only and kwh_only meters. For these buildings, we might need to merge some of their meters so that both kw and kwh charges are represented in the same meter account.
 
@@ -100,13 +100,13 @@ Following are the steps we took to explore and clean the data:
 
    In the end, our statistics improved as follows:
 
-    - perc of rows - current charges of zero: 4.17%
-    - perc of rows - kw charges of zero: 19.90%
-    - perc of rows - kwh charges of zero: 8.47%
+   > - perc of rows - current charges of zero: 4.17%
+   > - perc of rows - kw charges of zero: 19.90%
+   > - perc of rows - kwh charges of zero: 8.47%
 
-    - perc of kw_only meters: 2.16%
-    - perc of kwh_only meters: 20.62%
-    - perc of kwh_and_kw meters: 77.23%
+   > - perc of kw_only meters: 2.16%
+   > - perc of kwh_only meters: 20.62%
+   > - perc of kwh_and_kw meters: 77.23%
 
    The percentage of meters that do not have KW Charges is still quite high (21%), we need to further consult with our domain knowledge expert to figure out how to handle that. All other metrics appear resonable.
 

@@ -64,41 +64,41 @@ Besides those rules, our sponsor Linnea Paton from JLL pointed out some edge cas
 Following are the steps we took to explore and clean the data:
 
 
-* Scaling, missing value imputation, erroneous data point:
+#### Scaling, missing value imputation, erroneous data point:
 
 1. General Data Cleaning
 
-First, we cleaned the raw data to exclude rows with null account name, duplicated values and estimated electricity charges since they will not have accurate predictive value for our model.
+   First, we cleaned the raw data to exclude rows with null account name, duplicated values and estimated electricity charges since they will not have accurate predictive value for our model.
 
-Secondly, we cleaned data types of variables regarding electricity consumption and charges from string to float. These variables will be our main metrics to draw statistical conclusions and detect energy consumption anomalies from.
+   Secondly, we cleaned data types of variables regarding electricity consumption and charges from string to float. These variables will be our main metrics to draw statistical conclusions and detect energy consumption anomalies from.
 
-Lastly, we converted the time-related variables such as revenue_month, service_start_date and service_end_date to datetime type in python for processing and analysis. We will base off these variables to detect overlaps and gaps in billing windows.
+   Lastly, we converted the time-related variables such as revenue_month, service_start_date and service_end_date to datetime type in python for processing and analysis. We will base off these variables to detect overlaps and gaps in billing windows.
 
 2. Create Unique identifier
 
-Based on the metadata info of the NYCHA public dataset, we used the combination of 'TDS#' and 'Location' to create 'Building ID' as the unique identifier for each building. However, 'Building ID' alone is still not the primary key for each data entry, we are able to uniquely identify over 99.8% of the data entries by combining 'Building ID', 'Meter Number' and 'Revenue Month'. This aligns well with our understanding of the data granularities (2 levels). The remaining 0.2% of the entries are caused by rebilling (two entries for the same billing window of the same meter) and invalid entries where all values associated with consumption and charges are zero.
+   Based on the metadata info of the NYCHA public dataset, we used the combination of 'TDS#' and 'Location' to create 'Building ID' as the unique identifier for each building. However, 'Building ID' alone is still not the primary key for each data entry, we are able to uniquely identify over 99.8% of the data entries by combining 'Building ID', 'Meter Number' and 'Revenue Month'. This aligns well with our understanding of the data granularities (2 levels). The remaining 0.2% of the entries are caused by rebilling (two entries for the same billing window of the same meter) and invalid entries where all values associated with consumption and charges are zero.
 
 3. Check validity of data entry logics
    
-We found the percentages of rows with zero values in our metrics of interest were surprisingly high:
+   We found the percentages of rows with zero values in our metrics of interest were surprisingly high:
 
     - perc of rows - current charges of zero: 16.61%
     - perc of rows - kw charges of zero: 41.13%
     - perc of rows - kwh charges of zero: 33.03%
 
-When aggregating the metrics based on meter numbers, it seems that some meters only record either the KWH charges or the KW charges. Following is a break-down of meters by type: 
+   When aggregating the metrics based on meter numbers, it seems that some meters only record either the KWH charges or the KW charges. Following is a break-down of meters by type: 
 
     - perc of kw_only meters: 27.66%
     - perc of kwh_only meters: 38.20%
     - perc of kwh_and_kw meters: 34.13%
   
-52.79% of the buildings have both kw_only and kwh_only meters. For these buildings, we might need to merge some of their meters so that both kw and kwh charges are represented in the same meter account.
+   52.79% of the buildings have both kw_only and kwh_only meters. For these buildings, we might need to merge some of their meters so that both kw and kwh charges are represented in the same meter account.
 
-By deep-diving into the data, we found there are many cases where under the same Building_ID, two meter numbers share the same last 6 digits and billing windows of all the years. Usually one meter has zero values in all KW_Charges and one has zero values in all KWH_Charges. It seems reasonable to combined them.
+   By deep-diving into the data, we found there are many cases where under the same Building_ID, two meter numbers share the same last 6 digits and billing windows of all the years. Usually one meter has zero values in all KW_Charges and one has zero values in all KWH_Charges. It seems reasonable to combined them.
 
-Furthermore, by comparing the billing months, we noticed around 13% of the meters have been replaced by newer meters over the year under the same building. Combining them further reduced the number of meters of invalid types.
+   Furthermore, by comparing the billing months, we noticed around 13% of the meters have been replaced by newer meters over the year under the same building. Combining them further reduced the number of meters of invalid types.
 
-In the end, our statistics improved as follows:
+   In the end, our statistics improved as follows:
 
     - perc of rows - current charges of zero: 4.17%
     - perc of rows - kw charges of zero: 19.90%
@@ -108,26 +108,26 @@ In the end, our statistics improved as follows:
     - perc of kwh_only meters: 20.62%
     - perc of kwh_and_kw meters: 77.23%
 
-The percentage of meters that do not have KW Charges is still quite high (21%), we need to further consult with our domain knowledge expert to figure out how to handle that. All other metrics appear resonable.
+   The percentage of meters that do not have KW Charges is still quite high (21%), we need to further consult with our domain knowledge expert to figure out how to handle that. All other metrics appear resonable.
 
 4. Address Service Date inconsistency
 
-Since the meter reading is done manually in many buildings in New York, the meter reading dates (service start date and service end date) are not consistent across all entries. However, the service dates can be used to detect both overlaps and gaps between billing windows. As it turns out, 40% of the time a meter has gaps longer than 5 days in a year and 1.27% of the meters have overlaps in their billing windows. Again we need to discuss with our sponsor for handling these cases.
+   Since the meter reading is done manually in many buildings in New York, the meter reading dates (service start date and service end date) are not consistent across all entries. However, the service dates can be used to detect both overlaps and gaps between billing windows. As it turns out, 40% of the time a meter has gaps longer than 5 days in a year and 1.27% of the meters have overlaps in their billing windows. Again we need to discuss with our sponsor for handling these cases.
 
 5. Add new calculated metrics
 
-After all the above data cleaning steps and with all the caveats of the edge cases, we aggregated the data to the two target levels:
+   After all the above data cleaning steps and with all the caveats of the edge cases, we aggregated the data to the two target levels:
 
-- Building_ID + Revenue_Month
-- Buildling_ID + Meter_Number + Revenue_Month
+    - Building_ID + Revenue_Month
+    - Buildling_ID + Meter_Number + Revenue_Month
 
-Per suggestion of our sponsor and domain knowledge expert Linnea Paton, we added two calculated fields for our predicative model.
+   Per suggestion of our sponsor and domain knowledge expert Linnea Paton, we added two calculated fields for our predicative model.
 
-'Total Charges' is calculated by adding 'KW Charges' to 'KWH Charges', this field will provide a more comprehensive trend of total consumption cost.
+   'Total Charges' is calculated by adding 'KW Charges' to 'KWH Charges', this field will provide a more comprehensive trend of total consumption cost.
 
-'Total Energy Rate' is calculated by dividing 'Total Charges' by 'Consumption (KWH)', this field is the industry standard measure for evaluating consumption efficiency.
+   'Total Energy Rate' is calculated by dividing 'Total Charges' by 'Consumption (KWH)', this field is the industry standard measure for evaluating consumption efficiency.
 
-* Challenges in data pipeline creation:
+#### Challenges in data pipeline creation:
 
 Currently, the data files we are working with come from flat files provided by our sponsor. Therefore, we are ingesting stdata into Jupyter Notebook for processing and creating rules for anomaly detection.
 

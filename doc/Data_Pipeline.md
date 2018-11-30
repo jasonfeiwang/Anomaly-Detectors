@@ -178,6 +178,11 @@ We also explored potential time series trend over the 8 years data span as well 
 ![](total_charge_trend.png)
 
 
+Another analysis that we did, was to segregate the months out from the cleaned dataset, aggregate all the values for electricity consumption(KW and KWH), and visualize the trend of how the consumption varies on a month by month basis. The plot on the left charts the KW consumption and the one on the right KWH. The graphs are somewhat similar in their peaks and lows, and it is easy to see the higher consumption during the summer months.
+
+![](Consumption_Vs_Month.png)
+
+
 ### Fully describe which features you will be using in your design
 
 We have three sets of features for our model design: location features, timestamp features and consumption/charge features. 

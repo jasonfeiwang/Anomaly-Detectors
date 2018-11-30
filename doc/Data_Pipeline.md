@@ -88,11 +88,11 @@ We found the percentages of rows with zero values in our metrics of interest wer
 
 When aggregating the metrics based on meter numbers, it seems that some meters only record either the KWH charges or the KW charges. Following is a break-down of meters by type: 
 
-    - perc of kw_only meters: 26.99%
-    - perc of kwh_only meters: 31.93%
-    - perc of kwh_and_kw meters: 41.09%
+    - perc of kw_only meters: 27.66%
+    - perc of kwh_only meters: 38.20%
+    - perc of kwh_and_kw meters: 34.13%
   
-40.99% of the buildings have both kw_only and kwh_only meters. For these buildings, we might need to merge some of their meters so that both kw and kwh charges are represented in the same meter account.
+52.79% of the buildings have both kw_only and kwh_only meters. For these buildings, we might need to merge some of their meters so that both kw and kwh charges are represented in the same meter account.
 
 By deep-diving into the data, we found there are many cases where under the same Building_ID, two meter numbers share the same last 6 digits and billing windows of all the years. Usually one meter has zero values in all KW_Charges and one has zero values in all KWH_Charges. It seems reasonable to combined them.
 
@@ -104,11 +104,11 @@ In the end, our statistics improved as follows:
     - perc of rows - kw charges of zero: 19.90%
     - perc of rows - kwh charges of zero: 8.47%
 
-    - perc of kw_only meters: 2.12%
-    - perc of kwh_only meters: 19.00%
-    - perc of kwh_and_kw meters: 78.88%
+    - perc of kw_only meters: 2.16%
+    - perc of kwh_only meters: 20.62%
+    - perc of kwh_and_kw meters: 77.23%
 
-The percentage of meters that do not have KW Charges is still quite high (19%), we need to further consult with our domain knowledge expert to figure out how to handle that. All other metrics appear resonable.
+The percentage of meters that do not have KW Charges is still quite high (21%), we need to further consult with our domain knowledge expert to figure out how to handle that. All other metrics appear resonable.
 
 4. Address Service Date inconsistency
 

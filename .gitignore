@@ -1,1 +1,5 @@
 .ipynb_checkpoints
+.Rproj.user
+/src/r/packrat/lib*/
+/src/r/packrat/src/
+

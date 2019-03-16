@@ -1,3 +1,7 @@
+---
+typora-root-url: ../../../../Screen Shot 2019-03-16 at 3.59.02 PM.png
+---
+
 # AnomalyDetectors
 
 ## Project Background
@@ -26,7 +30,7 @@ There are four major folders in this repository, namely: **data**, **doc**, **ou
 
 We followed the framework below throughout the project: solid boxes denote the methods we successfully implemented and the dashed boxes show the methods we tried but didn't work for our particular use case.
 
-![Screen Shot 2019-03-16 at 3.59.02 PM](/Users/crystal-pro/Desktop/Screen%20Shot%202019-03-16%20at%203.59.02%20PM.png)
+<img width="839" alt="Screen Shot 2019-03-16 at 4 07 40 PM" src="https://user-images.githubusercontent.com/32491507/54482755-bf1e9680-4805-11e9-928d-3858c52f6ed7.png">
 
 ## Folder Structure
 

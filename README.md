@@ -1,7 +1,3 @@
----
-typora-root-url: ../../../../Screen Shot 2019-03-16 at 3.59.02 PM.png
----
-
 # AnomalyDetectors
 
 ## Project Background

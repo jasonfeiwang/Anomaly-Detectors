@@ -14,13 +14,13 @@ Our capstone project sponsor, Jones Lang LaSalle Americas, Inc. (JLL) is in char
 
 There are four major folders in this repository, namely: **data**, **doc**, **output**, and **src**. (Please also refer to **Folder Structure** below for detailed structure.)
 
-**data** folder contains the original data we downloaded from New York City Housing Authority, it contains electricity consumption data from 2010 to 2018 on a monthly base for building in New York.
+* **data** folder contains the original data we downloaded from New York City Housing Authority, it contains electricity consumption data from 2010 to 2018 on a monthly base for building in New York.
 
-**doc** folder contains artifacts we have generated during the capstone projects, from Data Pipeline, Project Proposal, Interim Presentation to Final Poster and Paper. 
+* **doc** folder contains artifacts we have generated during the capstone projects, from Data Pipeline, Project Proposal, Interim Presentation to Final Poster and Paper. 
 
-**output** folder houses the intermediate output we have generated through the project, mainly after cleaning the original dataset and prorating/imputating consumptions on an account level.
+* **output** folder houses the intermediate output we have generated through the project, mainly after cleaning the original dataset and prorating/imputating consumptions on an account level.
 
-**src** folder holds all the codes in this project: users can use the Data_cleaning notebook to prepare any given dataset (e.g. detecting billing gaps, prorate bills to calendar months, and imputate missing values); all Demo notebooks are a guide to see the difference amongst the three different methods and a step by step guide of how each methods work on an example account; finally, the methods notebook provides a clean loop for users to run a given csv files through the method and output a dataframe with identification of the anomalous points detected.
+* **src** folder holds all the codes in this project: users can use the Data_cleaning notebook to prepare any given dataset (e.g. detecting billing gaps, prorate bills to calendar months, and imputate missing values); all Demo notebooks are a guide to see the difference amongst the three different methods and a step by step guide of how each methods work on an example account; finally, the methods notebook provides a clean loop for users to run a given csv files through the method and output a dataframe with identification of the anomalous points detected.
 
 ## Project Framework
 

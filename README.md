@@ -38,6 +38,7 @@ Anomaly-Detectors
 ├── doc
 │   ├── AnomalyDetection_Poster.pdf
 │   ├── Data_Pipeline.md
+│   ├── Final_Report.pdf
 │   ├── Interim_Presentation.pdf
 │   ├── Problem_Statement.pdf
 │   └── Project_Proposal.pdf

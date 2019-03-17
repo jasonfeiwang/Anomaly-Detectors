@@ -56,9 +56,9 @@ Anomaly-Detectors
     ├── Clustering_Demo.ipynb
     ├── Decomposition.ipynb
     ├── Decomposition_Demo.ipynb
+    ├── NYCHA_Data_Cleaning.ipynb
     ├── Prophet.ipynb
-    ├── Prophet_Demo.ipynb
-    └── NYCHA_Data_Cleaning.ipynb
+    └── Prophet_Demo.ipynb
 
 ```
 

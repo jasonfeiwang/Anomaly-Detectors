@@ -32,21 +32,31 @@ We followed the framework below throughout the project: solid boxes denote the m
 
 ```bash
 Anomaly-Detectors
-├── README.md
+── README.md
 ├── data
+│   ├── Client\ 1\ -\ Data\ for\ UW\ team.xlsx
+│   ├── Client\ 2\ -\ Data\ for\ UW\ team.xlsx
 │   └── NYC\ Open\ Data\ -\ Electric_Consumption_And_Cost__2010_-__June_2018_.csv
 ├── doc
 │   ├── AnomalyDetection_Poster.pdf
 │   ├── Data_Pipeline.md
-│   ├── Final_Report.pdf
+│   ├── Final_Report.pdf
 │   ├── Interim_Presentation.pdf
 │   ├── Problem_Statement.pdf
 │   └── Project_Proposal.pdf
 ├── environment.yml
 ├── output
-│   ├── NYCHA_Prorated_KWH
-│   ├── NYCHA_Prorated_KWH.csv
-│   ├── NYCHA_TS.csv
+│   ├── client1
+│   │   ├── Client1_Prorated_TS
+│   │   ├── Client1_Prorated_TS.csv
+│   │   ├── df_flags
+│   │   ├── df_kwh_clean_data
+│   │   ├── df_mapping
+│   │   └── df_prorated
+│   ├── nycha
+│   │   ├── NYCHA_Prorated_KWH
+│   │   ├── NYCHA_Prorated_KWH.csv
+│   │   └── NYCHA_TS.csv
 │   └── result_summary_plots
 │       ├── Clustering.png
 │       ├── Prophet.png
@@ -54,9 +64,11 @@ Anomaly-Detectors
 └── src
     ├── Clustering.ipynb
     ├── Clustering_Demo.ipynb
+    ├── Data_Cleaning_Client1.ipynb
+    ├── Data_Cleaning_Client2.ipynb
+    ├── Data_Cleaning_NYCHA.ipynb
     ├── Decomposition.ipynb
     ├── Decomposition_Demo.ipynb
-    ├── NYCHA_Data_Cleaning.ipynb
     ├── Prophet.ipynb
     └── Prophet_Demo.ipynb
 

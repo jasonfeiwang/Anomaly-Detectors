@@ -32,7 +32,7 @@ We followed the framework below throughout the project: solid boxes denote the m
 
 ```bash
 Anomaly-Detectors
-── README.md
+├── README.md
 ├── data
 │   ├── Client\ 1\ -\ Data\ for\ UW\ team.xlsx
 │   ├── Client\ 2\ -\ Data\ for\ UW\ team.xlsx
@@ -47,28 +47,45 @@ Anomaly-Detectors
 ├── environment.yml
 ├── output
 │   ├── client1
-│   │   ├── Client1_Prorated_TS
-│   │   ├── Client1_Prorated_TS.csv
-│   │   ├── df_flags
-│   │   ├── df_kwh_clean_data
+│   │   ├── df_cleaned
 │   │   ├── df_mapping
-│   │   └── df_prorated
-│   ├── nycha
-│   │   ├── NYCHA_Prorated_KWH
-│   │   ├── NYCHA_Prorated_KWH.csv
-│   │   └── NYCHA_TS.csv
-│   └── result_summary_plots
-│       ├── Clustering.png
-│       ├── Prophet.png
-│       └── STL.png
+│   │   ├── df_orig
+│   │   ├── df_prorated
+│   │   ├── electricity_prorated_ts
+│   │   └── electricity_prorated_ts.csv
+│   ├── client2
+│   │   ├── electricity
+│   │   │   ├── df_cleaned
+│   │   │   ├── df_mapping
+│   │   │   ├── df_orig
+│   │   │   ├── df_prorated
+│   │   │   ├── electricity_prorated_ts
+│   │   │   └── electricity_prorated_ts.csv
+│   │   └── natural_gas
+│   │       ├── df_cleaned
+│   │       ├── df_mapping
+│   │       ├── df_orig
+│   │       ├── df_prorated
+│   │       ├── natural_gas_prorated_ts
+│   │       └── natural_gas_prorated_ts.csv
+│   └── nycha
+│       ├── NYCHA_Prorated_KWH
+│       ├── NYCHA_Prorated_KWH.csv
+│       ├── NYCHA_TS.csv
+│       └── result_summary_plots
+│           ├── Clustering.png
+│           ├── Prophet.png
+│           └── STL.png
 └── src
     ├── Clustering.ipynb
     ├── Clustering_Demo.ipynb
     ├── Data_Cleaning_Client1.ipynb
-    ├── Data_Cleaning_Client2.ipynb
+    ├── Data_Cleaning_Client2_Electricity.ipynb
+    ├── Data_Cleaning_Client2_Natural_Gas.ipynb
     ├── Data_Cleaning_NYCHA.ipynb
     ├── Decomposition.ipynb
     ├── Decomposition_Demo.ipynb
+    ├── Decomposition_Exploration.ipynb
     ├── Prophet.ipynb
     └── Prophet_Demo.ipynb
 

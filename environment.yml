@@ -1,4 +1,4 @@
-name: uwcapstone
+name: uw-capstone
 channels:
   - conda-forge
   - defaults
@@ -132,8 +132,9 @@ dependencies:
   - webencodings=0.5.1=py37_1
   - wheel=0.33.1=py37_0
   - widgetsnbextension=3.4.2=py37_0
+  - xlrd=1.2.0=py37_0
   - xz=5.2.4=h1de35cc_4
   - zeromq=4.3.1=h0a44026_3
   - zlib=1.2.11=h1de35cc_3
-prefix: /Users/feiwang/miniconda3/envs/uwcapstone
+prefix: /uw-capstone
 

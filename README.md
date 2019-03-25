@@ -47,6 +47,10 @@ Anomaly-Detectors
 ├── environment.yml
 ├── output
 │   ├── client1
+│   │   ├── anomaly_detection_decomposition_client1_electricity_charge.csv
+│   │   ├── anomaly_detection_decomposition_client1_electricity_consumption.csv
+│   │   ├── anomaly_detection_prophet_client1_electricity_charge.csv
+│   │   ├── anomaly_detection_prophet_client1_electricity_consumption.csv
 │   │   ├── df_cleaned
 │   │   ├── df_mapping
 │   │   ├── df_orig
@@ -55,6 +59,10 @@ Anomaly-Detectors
 │   │   └── electricity_prorated_ts.csv
 │   ├── client2
 │   │   ├── electricity
+│   │   │   ├── anomaly_detection_decomposition_client2_electricity_charge.csv
+│   │   │   ├── anomaly_detection_decomposition_client2_electricity_consumption.csv
+│   │   │   ├── anomaly_detection_prophet_client2_electricity_charge.csv
+│   │   │   ├── anomaly_detection_prophet_client2_electricity_consumption.csv
 │   │   │   ├── df_cleaned
 │   │   │   ├── df_mapping
 │   │   │   ├── df_orig
@@ -62,6 +70,10 @@ Anomaly-Detectors
 │   │   │   ├── electricity_prorated_ts
 │   │   │   └── electricity_prorated_ts.csv
 │   │   └── natural_gas
+│   │       ├── anomaly_detection_decomposition_client2_natural_gas_charge.csv
+│   │       ├── anomaly_detection_decomposition_client2_natural_gas_consumption.csv
+│   │       ├── anomaly_detection_prophet_client2_natural_gas_charge.csv
+│   │       ├── anomaly_detection_prophet_client2_natural_gas_consumption.csv
 │   │       ├── df_cleaned
 │   │       ├── df_mapping
 │   │       ├── df_orig
